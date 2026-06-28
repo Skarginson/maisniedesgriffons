@@ -15,7 +15,7 @@ import site from '../data/site.json';
     </div>
     {site.about.image && (
       <div class="about-image reveal">
-        <img src={site.about.image} alt={site.about.imageAlt} loading="lazy" />
+        <img src={site.about.image} alt={site.about.imageAlt} loading="lazy" onerror="this.onerror=null;this.src='/placeholder.svg'" />
       </div>
     )}
   </div>

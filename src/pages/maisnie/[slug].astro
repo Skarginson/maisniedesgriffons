@@ -30,7 +30,7 @@ const { Content } = await render(membre);
         <Content />
       </div>
       <div class="membre-photo reveal">
-        <img src={photo} alt={photoAlt} loading="eager" />
+        <img src={photo} alt={photoAlt} loading="eager" onerror="this.onerror=null;this.src='/placeholder.svg'" />
       </div>
     </div>
   </section>

@@ -12,7 +12,7 @@ const { title, slug, thumbnail, thumbnailAlt } = Astro.props;
 <article class="anim-card reveal">
   <a href={`/les-animations/${slug}/`} class="anim-link">
     <div class="anim-media">
-      <img src={thumbnail} alt={thumbnailAlt} loading="lazy" class="anim-img" />
+      <img src={thumbnail} alt={thumbnailAlt} loading="lazy" class="anim-img" onerror="this.onerror=null;this.src='/placeholder.svg'" />
       <div class="anim-overlay">
         <h3 class="anim-title">{title}</h3>
       </div>

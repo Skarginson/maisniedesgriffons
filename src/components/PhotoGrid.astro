@@ -20,6 +20,7 @@ const { photos, galleryTitle } = Astro.props;
         alt={photo.alt}
         loading={i < 4 ? 'eager' : 'lazy'}
         class="photo-img"
+        onerror="this.onerror=null;this.src='/placeholder.svg'"
       />
     </a>
   ))}

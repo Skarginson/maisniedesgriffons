@@ -18,7 +18,7 @@ const formattedDate = new Date(date).toLocaleDateString('fr-FR', {
 <article class="event-card reveal">
   <a href={`/sorties/${slug}/`} class="card-link" aria-label={title}>
     <div class="card-media">
-      <img src={thumbnail} alt={thumbnailAlt} loading="lazy" class="card-img" />
+      <img src={thumbnail} alt={thumbnailAlt} loading="lazy" class="card-img" onerror="this.onerror=null;this.src='/placeholder.svg'" />
       <div class="card-overlay">
         {lieu && <p class="card-lieu">{lieu}</p>}
         <h3 class="card-title">{title}</h3>

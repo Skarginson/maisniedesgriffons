@@ -13,7 +13,7 @@ const { title, slug, role, photo, photoAlt } = Astro.props;
 <article class="member-card reveal">
   <a href={`/maisnie/${slug}/`} class="member-link">
     <div class="member-media">
-      <img src={photo} alt={photoAlt} loading="lazy" class="member-img" />
+      <img src={photo} alt={photoAlt} loading="lazy" class="member-img" onerror="this.onerror=null;this.src='/placeholder.svg'" />
     </div>
     <div class="member-info">
       <h3 class="member-name">{title}</h3>

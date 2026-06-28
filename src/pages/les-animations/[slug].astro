@@ -38,7 +38,7 @@ const { Content } = await render(animation);
       </div>
       {photos.length === 0 && thumbnail && (
         <div class="anim-thumb reveal">
-          <img src={thumbnail} alt={thumbnailAlt} loading="eager" />
+          <img src={thumbnail} alt={thumbnailAlt} loading="eager" onerror="this.onerror=null;this.src='/placeholder.svg'" />
         </div>
       )}
     </div>
