@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const sorties = await getCollection('sorties');
+  return sorties.map(s => ({
+    params: { slug: s.slug },
+    props: { sortie: s },
+  }));
+}
+
+const { sortie } = Astro.props;
+const { title, date, lieu, photos, thumbnail, thumbnailAlt } = sortie.data;
+const { Content } = await render(sortie);
+
+const formattedDate = new Date(date).toLocaleDateString('fr-FR', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+---
+
+<BaseLayout
+  title={title}
+  description={`Sortie "${title}"${lieu ? ` à ${lieu}` : ''} - photos et résumé`}
+  ogImage={thumbnail}
+>
+  {photos.length > 0 && <Lightbox />}
+
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="/sorties/">Nos Sorties</a> / {title}</p>
+      <h1 class="page-title">{title}</h1>
+      {lieu && <p class="page-lieu">{lieu}</p>}
+      <time class="page-date" datetime={date}>{formattedDate}</time>
+      {photos.length > 0 && (
+        <p class="photo-count">{photos.length} photo{photos.length > 1 ? 's' : ''}</p>
+      )}
+    </div>
+  </div>
+
+  <section class="sortie-resume">
+    <div class="container resume-inner">
+      <Content />
+    </div>
+  </section>
+
+  <section class="sortie-photos">
+    <div class="container">
+      {photos.length > 0
+        ? <PhotoGrid photos={photos} galleryTitle={title} />
+        : <p class="empty-state">Photos à venir...</p>
+      }
+    </div>
+  </section>
+
+  <div class="page-nav container">
+    <a href="/sorties/" class="btn">← Retour aux sorties</a>
+  </div>
+</BaseLayout>
+
+<style>
+.page-lieu {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 0.5rem;
+}
+.page-date {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+  letter-spacing: 0.06em;
+}
+.photo-count {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+.sortie-resume { padding: 3rem 0 2rem; }
+.resume-inner {
+  max-width: 720px;
+}
+.resume-inner :global(p) {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  margin-bottom: 1rem;
+}
+.sortie-photos { padding: 0 0 2rem; }
+</style>

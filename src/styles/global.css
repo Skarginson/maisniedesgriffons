@@ -1,0 +1,165 @@
+/* ─── Variables ─── */
+:root {
+  --bg: #1a1510;
+  --bg-secondary: #120f0b;
+  --bg-card: #0e0c09;
+  --text: #e8dcc8;
+  --text-muted: #9a8a72;
+  --accent: #c4956a;
+  --accent-light: #d4aa85;
+  --border: #2e2418;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Source Sans 3', system-ui, sans-serif;
+
+  --max-width: 1200px;
+  --px: clamp(1rem, 4vw, 2rem);
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: 0.3s var(--ease);
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  pointer-events: none;
+}
+a img, button img { pointer-events: auto; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { border: none; background: none; cursor: pointer; font: inherit; color: inherit; }
+
+/* ─── Typographie ─── */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.2;
+}
+h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
+
+/* ─── Utilitaires ─── */
+.container {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--px);
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.accent-line {
+  width: 60px;
+  height: 1px;
+  background: var(--accent);
+  margin-bottom: 2.5rem;
+}
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: var(--transition);
+}
+.btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+.breadcrumb {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.breadcrumb a {
+  color: var(--accent);
+  transition: opacity var(--transition);
+}
+.breadcrumb a:hover { opacity: 0.8; }
+.page-header {
+  padding-top: calc(72px + 3rem);
+  padding-bottom: 2.5rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+.page-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+.page-nav {
+  padding-bottom: 5rem;
+}
+.empty-state {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 4rem 0;
+  font-style: italic;
+}
+
+/* ─── Grilles ─── */
+.sorties-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 640px) { .sorties-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .sorties-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.membres-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 480px) { .membres-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .membres-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.animations-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+@media (min-width: 640px) { .animations-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .animations-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ─── Scroll reveal ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Prose ─── */
+.prose p { margin-bottom: 1rem; color: var(--text-muted); line-height: 1.85; }
+.prose p:last-child { margin-bottom: 0; }

@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+  slug: string;
+  thumbnail: string;
+  thumbnailAlt: string;
+}
+
+const { title, slug, thumbnail, thumbnailAlt } = Astro.props;
+---
+
+<article class="anim-card reveal">
+  <a href={`/les-animations/${slug}/`} class="anim-link">
+    <div class="anim-media">
+      <img src={thumbnail} alt={thumbnailAlt} loading="lazy" class="anim-img" />
+      <div class="anim-overlay">
+        <h3 class="anim-title">{title}</h3>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+.anim-link { display: block; }
+.anim-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: var(--bg-card);
+}
+.anim-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: grayscale(20%);
+}
+.anim-link:hover .anim-img { transform: scale(1.06); filter: grayscale(0%); }
+.anim-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+}
+.anim-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.2;
+}
+</style>

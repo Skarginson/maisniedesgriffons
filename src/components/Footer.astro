@@ -1,0 +1,104 @@
+---
+import site from '../data/site.json';
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <p class="footer-name">{site.siteName}</p>
+      <p class="footer-tagline">{site.tagline}</p>
+    </div>
+
+    <div class="footer-col">
+      <h3 class="footer-heading">Contact</h3>
+      <ul class="footer-list">
+        <li>{site.contact.nom}</li>
+        <li>{site.contact.adresse}</li>
+        <li><a href={`tel:${site.contact.telephone}`}>{site.contact.telephone}</a></li>
+        <li><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></li>
+        {site.contact.instagram && (
+          <li>
+            <a href={site.contact.instagram} target="_blank" rel="noopener noreferrer">
+              {site.contact.instagramHandle}
+            </a>
+          </li>
+        )}
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3 class="footer-heading">Navigation</h3>
+      <ul class="footer-list">
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/maisnie/">La Maisnie</a></li>
+        <li><a href="/camp/">Le Camp</a></li>
+        <li><a href="/les-animations/">Les Animations</a></li>
+        <li><a href="/sorties/">Nos Sorties</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+      <ul class="footer-legal">
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© {new Date().getFullYear()} {site.siteName} - Tous droits réservés</p>
+  </div>
+</footer>
+
+<style>
+.footer {
+  background: #050302;
+  border-top: 1px solid var(--border);
+  padding-top: 4rem;
+  margin-top: 4rem;
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+}
+@media (min-width: 640px) { .footer-inner { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .footer-inner { grid-template-columns: 2fr 1.5fr 1.5fr; } }
+
+.footer-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.footer-tagline { font-size: 0.95rem; color: var(--text-muted); font-style: italic; }
+
+.footer-heading {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.footer-list li,
+.footer-list a { font-size: 0.95rem; color: var(--text-muted); }
+.footer-list a { transition: color var(--transition); }
+.footer-list a:hover { color: var(--text); }
+
+.footer-legal {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 1.25rem var(--px);
+  text-align: center;
+}
+.footer-bottom p { font-size: 0.85rem; color: var(--text-muted); }
+</style>

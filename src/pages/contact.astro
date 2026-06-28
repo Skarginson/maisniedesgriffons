@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+---
+
+<BaseLayout title="Contact">
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Contact</h1>
+      <div class="accent-line"></div>
+    </div>
+  </div>
+
+  <section class="contact-section">
+    <div class="container contact-inner">
+      <div class="contact-info reveal">
+        <h2>Nous contacter</h2>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-label">Association</span>
+            <span class="contact-value">{site.siteName}</span>
+          </li>
+          <li>
+            <span class="contact-label">Responsable</span>
+            <span class="contact-value">{site.contact.nom}</span>
+          </li>
+          <li>
+            <span class="contact-label">Adresse</span>
+            <span class="contact-value">{site.contact.adresse}</span>
+          </li>
+          <li>
+            <span class="contact-label">Téléphone</span>
+            <a href={`tel:${site.contact.telephone}`} class="contact-value">
+              {site.contact.telephone}
+            </a>
+          </li>
+          <li>
+            <span class="contact-label">Email</span>
+            <a href={`mailto:${site.contact.email}`} class="contact-value">
+              {site.contact.email}
+            </a>
+          </li>
+          {site.contact.instagram && (
+            <li>
+              <span class="contact-label">Instagram</span>
+              <a
+                href={site.contact.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-value"
+              >
+                {site.contact.instagramHandle}
+              </a>
+            </li>
+          )}
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.contact-section { padding: 4rem 0 8rem; }
+.contact-inner { max-width: 600px; }
+.contact-info h2 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  margin-bottom: 2.5rem;
+  color: var(--text);
+}
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.contact-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.contact-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.contact-value {
+  font-size: 1.05rem;
+  color: var(--text);
+  transition: color var(--transition);
+  pointer-events: auto;
+}
+a.contact-value:hover { color: var(--accent); }
+</style>

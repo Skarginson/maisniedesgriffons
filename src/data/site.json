@@ -1,0 +1,22 @@
+{
+  "siteName": "La Maisnie des Griffons",
+  "tagline": "La vie au XIIIème siècle",
+  "description": "Association de reconstitution historique présentant la vie quotidienne du XIIIème siècle à travers un camp médiéval ouvert au public.",
+  "about": {
+    "title": "Qui sommes-nous ?",
+    "text": "La Maisnie des Griffons est une association de reconstitution historique centrée sur la vie au XIIIème siècle. Lorsque la Maisnie installe son camp, elle met en place des ateliers artisanaux et pédagogiques ouverts au public. Notre démarche est de présenter, en situation, des aspects de la vie du XIIIème siècle : forge, haubergerie, cuisine, tir à l'arbalète, calligraphie et bien d'autres. Les visiteurs peuvent circuler librement dans le camp et s'entretenir avec nos membres.",
+    "image": "/src/assets/uploads/camp/camps-1.jpg",
+    "imageAlt": "Le camp de la Maisnie des Griffons"
+  },
+  "contact": {
+    "nom": "Laurent MARENCO",
+    "adresse": "9, rue Morand 75011 Paris",
+    "telephone": "01 43 57 35 26",
+    "email": "contact@lamaisniedesgriffons.com",
+    "instagram": "",
+    "instagramHandle": ""
+  },
+  "seo": {
+    "ogImage": "/src/assets/uploads/camp/camps-1.jpg"
+  }
+}

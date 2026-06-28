@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AnimationCard from '../../components/AnimationCard.astro';
+import { getCollection } from 'astro:content';
+
+const animations = (await getCollection('animations')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Les Animations"
+  description="Les 22 ateliers artisanaux et pédagogiques de la Maisnie des Griffons : forge, haubergerie, enluminure, cuisine médiévale et bien d'autres."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Les Animations</h1>
+      <div class="accent-line"></div>
+      <p class="page-subtitle">{animations.length} ateliers artisanaux et pédagogiques</p>
+    </div>
+  </div>
+
+  <section class="intro-section">
+    <div class="container">
+      <p class="intro-text reveal">
+        Lorsque la Maisnie installe son camp, nous mettons en place un certain nombre d'ateliers,
+        en fonction des membres présents. Ces ateliers sont à vocation artisanale ou pédagogique.
+        Notre démarche est de présenter, en situation, des aspects de la vie du XIIIème siècle.
+        Le public est invité à parcourir le camp et à rencontrer les artisans.
+      </p>
+    </div>
+  </section>
+
+  <section class="animations-section">
+    <div class="container">
+      <div class="animations-grid">
+        {animations.map(a => (
+          <AnimationCard
+            title={a.data.title}
+            slug={a.slug}
+            thumbnail={a.data.thumbnail}
+            thumbnailAlt={a.data.thumbnailAlt}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.intro-section { padding: 2.5rem 0 1rem; }
+.intro-text {
+  color: var(--text-muted);
+  max-width: 720px;
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+.animations-section { padding: 2rem 0 6rem; }
+</style>

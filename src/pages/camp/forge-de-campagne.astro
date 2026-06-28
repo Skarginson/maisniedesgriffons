@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="La forge de campagne" description="La forge de campagne de la Maisnie des Griffons.">
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="/camp/">Le Camp</a> / La forge de campagne</p>
+      <h1 class="page-title">La forge de campagne</h1>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="container content-inner">
+      <div class="prose reveal">
+        <p>
+          La forge de campagne a été conçue d'après des enluminures médiévales, avec notamment
+          un soufflet à double compartiment pour assurer un débit d'air régulier.
+        </p>
+        <p>
+          Elle permet à notre forgeronne de travailler le métal sur place, fabriquant outils,
+          couteaux, clous et sardines utilisés sur le camp. Sa conception mobile lui permet de
+          suivre la Maisnie dans tous ses déplacements.
+        </p>
+        <p>
+          <a href="/les-animations/forge/" class="inline-link">→ En savoir plus sur l'atelier Forge</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-nav container">
+    <a href="/camp/" class="btn">← Retour au Camp</a>
+  </div>
+</BaseLayout>
+
+<style>
+.content-section { padding: 3rem 0 2rem; }
+.content-inner { max-width: 720px; }
+.inline-link { color: var(--accent); pointer-events: auto; transition: opacity var(--transition); }
+.inline-link:hover { opacity: 0.8; }
+</style>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MemberCard from '../../components/MemberCard.astro';
+import { getCollection } from 'astro:content';
+
+const membres = (await getCollection('membres')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="La Maisnie"
+  description="Les personnages de la Maisnie des Griffons, groupe de reconstitution historique du XIIIème siècle."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">La Maisnie</h1>
+      <div class="accent-line"></div>
+      <p class="page-subtitle">Les personnages de la Maisnie des Griffons</p>
+    </div>
+  </div>
+
+  <section class="maisnie-intro">
+    <div class="container">
+      <p class="intro-text reveal">
+        La maisnie assemblée autour d'Amaury de Bailleul est un groupe uni par des liens à la fois
+        familiaux et économiques : une famille élargie aux amis et alliés, aux proches collaborateurs
+        et serviteurs, qui vit sous le même toit, le manoir de la Chesnay.
+        Cliquez sur un personnage pour en apprendre davantage.
+      </p>
+    </div>
+  </section>
+
+  <section class="membres-section">
+    <div class="container">
+      <div class="membres-grid">
+        {membres.map(m => (
+          <MemberCard
+            title={m.data.title}
+            slug={m.slug}
+            role={m.data.role}
+            photo={m.data.photo}
+            photoAlt={m.data.photoAlt}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.maisnie-intro { padding: 3rem 0 1rem; }
+.intro-text {
+  color: var(--text-muted);
+  max-width: 700px;
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+.membres-section { padding: 2rem 0 6rem; }
+</style>

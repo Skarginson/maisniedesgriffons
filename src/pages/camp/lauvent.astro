@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="L'auvent" description="L'auvent, installation centrale du camp de la Maisnie des Griffons.">
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="/camp/">Le Camp</a> / L'auvent</p>
+      <h1 class="page-title">L'auvent</h1>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="container content-inner">
+      <div class="prose reveal">
+        <p>
+          L'auvent est l'installation majeure de notre camp. Il fait 7,5 m sur 4
+          (soit 10 m sur 6 avec les cordages), sans compter la réserve à l'arrière et son abri latéral.
+        </p>
+        <p>
+          Nous nous installons sous cet auvent, autour de la grande table, pour préparer la cuisine
+          bien sûr, mais aussi pour certains de nos ateliers. C'est également là que la Maisnie
+          prend ses repas, préparés sur place.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-nav container">
+    <a href="/camp/" class="btn">← Retour au Camp</a>
+  </div>
+</BaseLayout>
+
+<style>
+.content-section { padding: 3rem 0 2rem; }
+.content-inner { max-width: 720px; }
+</style>

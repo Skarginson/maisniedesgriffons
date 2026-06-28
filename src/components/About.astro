@@ -1,0 +1,47 @@
+---
+import site from '../data/site.json';
+---
+
+<section class="about" id="about">
+  <div class="container about-inner">
+    <div class="about-text reveal">
+      <h2 class="section-title">{site.about.title}</h2>
+      <div class="accent-line"></div>
+      <p>{site.about.text}</p>
+      <div class="about-links">
+        <a href="/maisnie/" class="btn">La Maisnie</a>
+        <a href="/les-animations/" class="btn">Les Animations</a>
+      </div>
+    </div>
+    {site.about.image && (
+      <div class="about-image reveal">
+        <img src={site.about.image} alt={site.about.imageAlt} loading="lazy" />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+.about { padding: clamp(5rem, 12vw, 9rem) 0; }
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .about-inner { grid-template-columns: 1fr 1fr; }
+}
+.about-text p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+}
+.about-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+.about-image img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+</style>

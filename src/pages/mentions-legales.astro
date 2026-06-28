@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+---
+
+<BaseLayout title="Mentions légales">
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Mentions légales</h1>
+    </div>
+  </div>
+
+  <section class="legal-section">
+    <div class="container legal-content">
+      <h2>Éditeur du site</h2>
+      <p>{site.siteName}</p>
+      <p>{site.contact.nom}</p>
+      <p>{site.contact.adresse}</p>
+      <p>Tél. : <a href={`tel:${site.contact.telephone}`}>{site.contact.telephone}</a></p>
+      <p>Email : <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
+
+      <h2>Hébergement</h2>
+      <p>Ce site est hébergé sur Netlify (netlify.com).</p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>
+        L'ensemble des contenus (textes, photos) présents sur ce site sont la propriété
+        de {site.siteName} et sont protégés par le droit d'auteur. Toute reproduction
+        est interdite sans autorisation préalable.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.legal-section { padding: 4rem 0 8rem; }
+.legal-content { max-width: 720px; }
+.legal-content h2 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  margin: 2.5rem 0 0.75rem;
+  color: var(--accent);
+}
+.legal-content h2:first-child { margin-top: 0; }
+.legal-content p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 0.4rem;
+}
+.legal-content a { color: var(--accent); pointer-events: auto; }
+</style>

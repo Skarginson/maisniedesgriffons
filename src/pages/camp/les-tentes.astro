@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Les tentes" description="Les tentes du camp médiéval de la Maisnie des Griffons.">
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="/camp/">Le Camp</a> / Les tentes</p>
+      <h1 class="page-title">Les tentes</h1>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="container content-inner">
+      <div class="prose reveal">
+        <p>
+          Nous disposons de plusieurs tentes qui forment notre camp. Nous y dormons, mais
+          certaines sont gardées ouvertes pour montrer au public le mobilier et l'installation intérieure.
+        </p>
+        <p>Le camp est formé de :</p>
+        <ul class="tent-list">
+          <li>
+            <strong>Quatre tentes rondes</strong> de 4 m de diamètre (soit 5 m avec cordages).
+          </li>
+          <li>
+            <strong>Un grand tref ovale</strong> de 6 m sur 4 (8 m sur 6 avec les cordages).
+            La tente seigneuriale est toujours ouverte au public.
+          </li>
+          <li>
+            <strong>Deux grandes tentes dites "saxonnes"</strong> de 6 m par 3 (8 m par 5 avec
+            les cordages). L'une est maintenue ouverte pour présenter les étuves.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-nav container">
+    <a href="/camp/" class="btn">← Retour au Camp</a>
+  </div>
+</BaseLayout>
+
+<style>
+.content-section { padding: 3rem 0 2rem; }
+.content-inner { max-width: 720px; }
+.tent-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 1.25rem;
+}
+.tent-list li {
+  position: relative;
+  color: var(--text-muted);
+  line-height: 1.75;
+  padding-left: 1rem;
+}
+.tent-list li::before {
+  content: '-';
+  position: absolute;
+  left: -1rem;
+  color: var(--accent);
+}
+.tent-list strong { color: var(--text); font-weight: 500; }
+</style>

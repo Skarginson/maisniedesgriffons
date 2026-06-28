@@ -1,0 +1,94 @@
+---
+import site from '../data/site.json';
+---
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Reconstitution historique · XIIIème siècle</p>
+    <h1 class="hero-title">{site.tagline}</h1>
+    <p class="hero-name">{site.siteName}</p>
+    <a href="#about" class="btn hero-cta">Découvrir</a>
+  </div>
+  <a href="#about" class="hero-scroll" aria-label="Défiler vers le bas">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+</section>
+
+<style>
+.hero {
+  position: relative;
+  height: 100dvh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  /* Décommenter et adapter pour une image de fond :
+  background-image: url('/images/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  */
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(10, 8, 5, 0.7) 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 var(--px);
+  max-width: 760px;
+}
+.hero-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.75rem;
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+.hero-name {
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+}
+.hero-cta { pointer-events: auto; }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  color: var(--text-muted);
+  pointer-events: auto;
+  animation: bounce 2.5s ease-in-out infinite;
+  transition: color var(--transition);
+}
+.hero-scroll:hover { color: var(--accent); }
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
+}
+</style>

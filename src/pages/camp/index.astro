@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const sections = [
+  { href: '/camp/les-tentes/', title: 'Les tentes', desc: 'Quatre tentes rondes, un grand tref seigneurial et deux tentes saxonnes forment l\'enceinte du camp.' },
+  { href: '/camp/lauvent/', title: "L'auvent", desc: "L'installation centrale du camp : 7,5 m sur 4, espace de vie, de cuisine et d'ateliers." },
+  { href: '/camp/forge-de-campagne/', title: 'La forge de campagne', desc: 'Conçue d\'après des enluminures médiévales, avec soufflet à double compartiment.' },
+  { href: '/camp/cuisine/', title: 'La cuisine', desc: 'Portique avec broche et grill, batterie de cuisine médiévale, repas préparés sur place.' },
+];
+---
+
+<BaseLayout title="Le Camp" description="Le camp médiéval de la Maisnie des Griffons, ouvert au public lors de ses sorties.">
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Le Camp</h1>
+      <div class="accent-line"></div>
+    </div>
+  </div>
+
+  <section class="camp-intro">
+    <div class="container">
+      <div class="intro-block reveal">
+        <p>
+          Notre camp compte aujourd'hui huit tentes et deux grands auvents. Il permet
+          l'installation des ateliers et la vie sur place. Une fois installée, la Maisnie
+          est totalement autonome : le couchage, la cuisine et les repas sont assurés sur place.
+        </p>
+        <p>
+          Nous avons choisi d'ouvrir le camp au public et de lui permettre de circuler au
+          travers des installations pour découvrir la vie et les activités du XIIIème siècle.
+          Certaines tentes sont laissées ouvertes pour présenter au public le mobilier et
+          l'aménagement intérieur.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="camp-sections">
+    <div class="container">
+      <div class="camp-grid">
+        {sections.map(s => (
+          <a href={s.href} class="camp-card reveal">
+            <h2 class="camp-card-title">{s.title}</h2>
+            <p class="camp-card-desc">{s.desc}</p>
+            <span class="camp-card-link">En savoir plus →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.camp-intro { padding: 3rem 0 1rem; }
+.intro-block p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  max-width: 720px;
+  margin-bottom: 1rem;
+}
+.camp-sections { padding: 3rem 0 6rem; }
+.camp-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 640px) { .camp-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.camp-card {
+  display: block;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: border-color var(--transition), background var(--transition);
+}
+.camp-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-secondary);
+}
+.camp-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+.camp-card-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+.camp-card-link {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+</style>

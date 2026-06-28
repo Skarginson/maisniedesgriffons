@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const animations = await getCollection('animations');
+  return animations.map(a => ({
+    params: { slug: a.slug },
+    props: { animation: a },
+  }));
+}
+
+const { animation } = Astro.props;
+const { title, photos, thumbnail, thumbnailAlt } = animation.data;
+const { Content } = await render(animation);
+---
+
+<BaseLayout
+  title={title}
+  description={`Atelier ${title} - La Maisnie des Griffons`}
+  ogImage={thumbnail}
+>
+  {photos.length > 0 && <Lightbox />}
+
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="/les-animations/">Les Animations</a> / {title}</p>
+      <h1 class="page-title">{title}</h1>
+    </div>
+  </div>
+
+  <section class="anim-content">
+    <div class="container anim-inner">
+      <div class="anim-text reveal prose">
+        <Content />
+      </div>
+      {photos.length === 0 && thumbnail && (
+        <div class="anim-thumb reveal">
+          <img src={thumbnail} alt={thumbnailAlt} loading="eager" />
+        </div>
+      )}
+    </div>
+  </section>
+
+  {photos.length > 0 && (
+    <section class="anim-photos">
+      <div class="container">
+        <PhotoGrid photos={photos} galleryTitle={title} />
+      </div>
+    </section>
+  )}
+
+  <div class="page-nav container">
+    <a href="/les-animations/" class="btn">← Retour aux animations</a>
+  </div>
+</BaseLayout>
+
+<style>
+.anim-content { padding: 3rem 0 2rem; }
+.anim-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .anim-inner { grid-template-columns: 1fr 380px; }
+}
+.anim-text :global(p) {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+.anim-thumb img {
+  width: 100%;
+  object-fit: cover;
+}
+.anim-photos { padding: 0 0 2rem; }
+</style>

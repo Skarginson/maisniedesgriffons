@@ -1,0 +1,264 @@
+---
+import { getCollection } from 'astro:content';
+import site from '../data/site.json';
+
+interface Props { transparent?: boolean; }
+const { transparent = false } = Astro.props;
+
+const membres = (await getCollection('membres')).sort((a, b) => a.data.order - b.data.order);
+
+const campPages = [
+  { href: '/camp/', label: 'Vue d\'ensemble' },
+  { href: '/camp/les-tentes/', label: 'Les tentes' },
+  { href: '/camp/lauvent/', label: "L'auvent" },
+  { href: '/camp/forge-de-campagne/', label: 'La forge de campagne' },
+  { href: '/camp/cuisine/', label: 'La cuisine' },
+];
+
+const currentPath = Astro.url.pathname;
+function isActive(path: string) {
+  if (path === '/') return currentPath === '/';
+  return currentPath.startsWith(path);
+}
+---
+
+<header
+  class:list={['site-header', { 'site-header--transparent': transparent }]}
+  id="site-header"
+>
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label={site.siteName}>
+      <span class="logo-text">{site.siteName}</span>
+    </a>
+
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <ul class="nav-list">
+        <li>
+          <a href="/" class:list={['nav-link', { active: isActive('/') }]}>Accueil</a>
+        </li>
+
+        <li class="has-dropdown">
+          <a href="/maisnie/" class:list={['nav-link', { active: isActive('/maisnie/') }]}>
+            La Maisnie
+            <svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </a>
+          <ul class="dropdown">
+            {membres.map(m => (
+              <li>
+                <a href={`/maisnie/${m.slug}/`} class="dropdown-link">
+                  {m.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+
+        <li class="has-dropdown">
+          <a href="/camp/" class:list={['nav-link', { active: isActive('/camp/') }]}>
+            Le Camp
+            <svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </a>
+          <ul class="dropdown">
+            {campPages.map(p => (
+              <li><a href={p.href} class="dropdown-link">{p.label}</a></li>
+            ))}
+          </ul>
+        </li>
+
+        <li>
+          <a href="/les-animations/" class:list={['nav-link', { active: isActive('/les-animations/') }]}>
+            Les Animations
+          </a>
+        </li>
+
+        <li>
+          <a href="/sorties/" class:list={['nav-link', { active: isActive('/sorties/') }]}>
+            Nos Sorties
+          </a>
+        </li>
+
+        <li>
+          <a href="/contact/" class:list={['nav-link', { active: isActive('/contact/') }]}>
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition), border-color var(--transition);
+}
+.site-header--transparent {
+  background: transparent;
+  border-color: transparent;
+}
+.site-header--scrolled {
+  background: rgba(26, 21, 16, 0.96);
+  border-color: var(--border);
+  backdrop-filter: blur(8px);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  gap: 2rem;
+}
+.logo-text {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.nav { display: flex; align-items: center; }
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text);
+  border-color: var(--accent);
+}
+.chevron { transition: transform var(--transition); flex-shrink: 0; }
+
+/* Dropdown */
+.has-dropdown { position: relative; }
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  min-width: 220px;
+  padding: 0.5rem 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  z-index: 10;
+}
+.has-dropdown:hover .dropdown,
+.has-dropdown:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.has-dropdown:hover .chevron { transform: rotate(180deg); }
+.dropdown-link {
+  display: block;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: color var(--transition), background var(--transition);
+}
+.dropdown-link:hover { color: var(--accent); background: var(--bg-card); }
+
+/* Burger */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.5rem;
+}
+.burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  transition: var(--transition);
+}
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  .burger { display: flex; }
+  .nav {
+    position: fixed;
+    top: 72px; left: 0; right: 0; bottom: 0;
+    background: var(--bg-secondary);
+    padding: 1.5rem var(--px) 3rem;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform var(--transition);
+  }
+  .nav.open { transform: translateX(0); }
+  .nav-list { flex-direction: column; align-items: flex-start; gap: 0; width: 100%; }
+  .nav-link { font-size: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--border); width: 100%; }
+  .has-dropdown { width: 100%; }
+  .dropdown {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    background: none;
+    border: none;
+    padding: 0 0 0.5rem 1rem;
+    display: none;
+  }
+  .has-dropdown.open .dropdown { display: block; }
+  .has-dropdown.open .chevron { transform: rotate(180deg); }
+  .dropdown-link { padding: 0.5rem 0; border-bottom: none; }
+}
+</style>
+
+<script>
+const header = document.getElementById('site-header')!;
+const burger = document.getElementById('burger')!;
+const nav = document.getElementById('nav')!;
+
+window.addEventListener('scroll', () => {
+  header.classList.toggle('site-header--scrolled', window.scrollY > 40);
+}, { passive: true });
+
+burger.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded', String(open));
+});
+
+// Mobile: dropdowns toggle on click
+document.querySelectorAll('.has-dropdown .nav-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    if (window.innerWidth <= 900) {
+      e.preventDefault();
+      const parent = (link as HTMLElement).closest('.has-dropdown')!;
+      parent.classList.toggle('open');
+    }
+  });
+});
+</script>

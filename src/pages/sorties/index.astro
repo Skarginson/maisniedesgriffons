@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EventCard from '../../components/EventCard.astro';
+import { getCollection } from 'astro:content';
+
+const sorties = (await getCollection('sorties')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Nos sorties"
+  description="Toutes les sorties et participations de la Maisnie des Griffons en images."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Nos sorties</h1>
+      <div class="accent-line"></div>
+      <p class="page-subtitle">{sorties.length} sortie{sorties.length > 1 ? 's' : ''} au total</p>
+    </div>
+  </div>
+
+  <section class="sorties-section">
+    <div class="container">
+      <div class="sorties-grid">
+        {sorties.map(s => (
+          <EventCard
+            title={s.data.title}
+            slug={s.slug}
+            date={s.data.date}
+            lieu={s.data.lieu}
+            thumbnail={s.data.thumbnail}
+            thumbnailAlt={s.data.thumbnailAlt}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.sorties-section { padding: 3rem 0 6rem; }
+</style>

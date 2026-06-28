@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="La cuisine" description="La cuisine médiévale du camp de la Maisnie des Griffons.">
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="/camp/">Le Camp</a> / La cuisine</p>
+      <h1 class="page-title">La cuisine</h1>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="container content-inner">
+      <div class="prose reveal">
+        <p>
+          Cette installation est utilisée durant l'animation puisque nous faisons nous-mêmes
+          nos repas, suivant des recettes médiévales.
+        </p>
+        <p>
+          Notre cuisine de campagne comprend un portique avec broche et grill, ainsi qu'une
+          batterie de cuisine médiévale complète. Notre cuisinière prépare les repas de la
+          troupe et présente au public les recettes et les principes de l'alimentation médiévale,
+          notamment la théorie des humeurs.
+        </p>
+        <p>
+          <a href="/les-animations/cuisine/" class="inline-link">→ En savoir plus sur l'atelier Cuisine</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-nav container">
+    <a href="/camp/" class="btn">← Retour au Camp</a>
+  </div>
+</BaseLayout>
+
+<style>
+.content-section { padding: 3rem 0 2rem; }
+.content-inner { max-width: 720px; }
+.inline-link { color: var(--accent); pointer-events: auto; transition: opacity var(--transition); }
+.inline-link:hover { opacity: 0.8; }
+</style>

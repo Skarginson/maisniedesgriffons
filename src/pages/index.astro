@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import EventCard from '../components/EventCard.astro';
+import { getCollection } from 'astro:content';
+
+const sorties = (await getCollection('sorties'))
+  .filter(s => s.data.showOnHome)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 6);
+---
+
+<BaseLayout transparentHeader={true}>
+  <Hero />
+  <About />
+
+  <section class="home-sorties">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Nos sorties</h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle">Retrouvez nos dernières participations en images</p>
+      </div>
+
+      <div class="sorties-grid">
+        {sorties.map(s => (
+          <EventCard
+            title={s.data.title}
+            slug={s.slug}
+            date={s.data.date}
+            lieu={s.data.lieu}
+            thumbnail={s.data.thumbnail}
+            thumbnailAlt={s.data.thumbnailAlt}
+          />
+        ))}
+      </div>
+
+      <div class="sorties-cta reveal">
+        <a href="/sorties/" class="btn">Voir toutes les sorties</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-animations">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Nos animations</h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle">Artisanat, pédagogie et vie quotidienne du XIIIème siècle</p>
+      </div>
+      <div class="anims-preview reveal">
+        <p>Forge, haubergerie, enluminure, cuisine médiévale, tir à l'arbalète, frappe de monnaie... Découvrez les 22 ateliers que la Maisnie propose au public lors de ses sorties.</p>
+        <a href="/les-animations/" class="btn">Découvrir les animations</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.home-sorties {
+  padding: clamp(4rem, 10vw, 8rem) 0;
+  background: var(--bg-secondary);
+}
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+.sorties-cta { margin-top: 3rem; text-align: center; }
+
+.home-animations {
+  padding: clamp(4rem, 10vw, 7rem) 0;
+}
+.anims-preview p {
+  color: var(--text-muted);
+  max-width: 620px;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+</style>
