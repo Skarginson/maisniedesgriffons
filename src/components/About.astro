@@ -7,7 +7,12 @@ import site from '../data/site.json';
     <div class="about-text reveal">
       <h2 class="section-title">{site.about.title}</h2>
       <div class="accent-line"></div>
-      <p>{site.about.text}</p>
+      {site.about.paragraphs
+        ? site.about.paragraphs.map((p: string, i: number) => (
+            <p class:list={[{ 'definition': i === 1 }]}>{p}</p>
+          ))
+        : <p>{site.about.text}</p>
+      }
       <div class="about-links">
         <a href="/maisnie/" class="btn">La Maisnie</a>
         <a href="/les-animations/" class="btn">Les Animations</a>
@@ -36,7 +41,16 @@ import site from '../data/site.json';
   color: var(--text-muted);
   font-size: 1.05rem;
   line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+.about-text p:last-of-type {
   margin-bottom: 2.5rem;
+}
+.about-text p.definition {
+  font-style: italic;
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+  color: var(--text-muted);
 }
 .about-links { display: flex; gap: 1rem; flex-wrap: wrap; }
 .about-image img {

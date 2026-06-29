@@ -1,10 +1,15 @@
 {
   "siteName": "La Maisnie des Griffons",
-  "tagline": "La vie au XIIIème siècle",
+  "tagline": "Une maison marchande au XIIIème siècle",
   "description": "Association de reconstitution historique présentant la vie quotidienne du XIIIème siècle à travers un camp médiéval ouvert au public.",
   "about": {
     "title": "Qui sommes-nous ?",
-    "text": "La Maisnie des Griffons est une association de reconstitution historique centrée sur la vie au XIIIème siècle. Lorsque la Maisnie installe son camp, elle met en place des ateliers artisanaux et pédagogiques ouverts au public. Notre démarche est de présenter, en situation, des aspects de la vie du XIIIème siècle : forge, haubergerie, cuisine, tir à l'arbalète, calligraphie et bien d'autres. Les visiteurs peuvent circuler librement dans le camp et s'entretenir avec nos membres.",
+    "paragraphs": [
+      "Bienvenue sur le site de la Maisnie des Griffons, une association de bénévoles passionnés du Moyen Âge, et plus spécifiquement de la vie civile au XIIIème.",
+      "Maisnie : au moyen âge, le terme maisnie désigne une famille au sens large, regroupant les personnes liées par le sang ainsi que les familiers, les amis et plus généralement tous ceux vivant sous un même toit, dans une même maison.",
+      "C'est sur cette idée que depuis 2004, nous reconstituons de manière vivante et interactive le quotidien d'une maison de marchands et artisans sur les routes des grandes foires médiévales du XIIIème siècle.",
+      "Nous installons un camp ouvert où le public est invité à circuler librement pour voir nos ateliers et nos activités, s'entretenir avec nos membres et expérimenter au plus près la vie médiévale."
+    ],
     "image": "/src/assets/uploads/camp/camps-1.jpg",
     "imageAlt": "Le camp de la Maisnie des Griffons"
   },

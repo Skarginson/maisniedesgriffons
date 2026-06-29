@@ -28,6 +28,7 @@ function isActive(path: string) {
 >
   <div class="container header-inner">
     <a href="/" class="logo" aria-label={site.siteName}>
+      <img src="/logo_maisnie.jpg" alt="" class="logo-img" aria-hidden="true" />
       <span class="logo-text">{site.siteName}</span>
     </a>
 
@@ -119,6 +120,18 @@ function isActive(path: string) {
   justify-content: space-between;
   min-height: 72px;
   gap: 2rem;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logo-img {
+  height: 36px;
+  width: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 .logo-text {
   font-family: var(--font-serif);
