@@ -33,6 +33,7 @@ const pageTitle = title ? `${title} | ${site.siteName}` : site.siteName;
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -52,6 +53,19 @@ const pageTitle = title ? `${title} | ${site.siteName}` : site.siteName;
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // Redirect to /admin/ after accepting an invitation email
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', (user: any) => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+      }
+    </script>
 
     <script>
       const observer = new IntersectionObserver(

@@ -1,0 +1,66 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: src/assets/uploads
+public_folder: /src/assets/uploads
+
+locale: fr
+
+collections:
+  - name: sorties
+    label: Sorties
+    label_singular: Sortie
+    folder: src/content/sorties
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Titre, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { label: Ordre (plus petit = en premier), name: order, widget: number, default: 10 }
+      - { label: Lieu (optionnel), name: lieu, widget: string, required: false }
+      - { label: Vignette, name: thumbnail, widget: image }
+      - { label: Description de la vignette, name: thumbnailAlt, widget: string }
+      - { label: Afficher sur l'accueil, name: showOnHome, widget: boolean, default: false }
+      - label: Photos
+        name: photos
+        widget: list
+        required: false
+        fields:
+          - { label: Photo, name: image, widget: image }
+          - { label: Description, name: alt, widget: string }
+      - { label: Texte de présentation, name: body, widget: markdown }
+
+  - name: membres
+    label: Membres
+    label_singular: Membre
+    folder: src/content/membres
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Nom du personnage, name: title, widget: string }
+      - { label: Ordre d'affichage, name: order, widget: number, default: 10 }
+      - { label: Rôle / Titre, name: role, widget: string }
+      - { label: Photo, name: photo, widget: image }
+      - { label: Description de la photo, name: photoAlt, widget: string }
+      - { label: Biographie, name: body, widget: markdown }
+
+  - name: animations
+    label: Animations
+    label_singular: Animation
+    folder: src/content/animations
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Titre de l'atelier, name: title, widget: string }
+      - { label: Ordre d'affichage, name: order, widget: number, default: 10 }
+      - { label: Vignette, name: thumbnail, widget: image }
+      - { label: Description de la vignette, name: thumbnailAlt, widget: string }
+      - label: Photos de l'atelier
+        name: photos
+        widget: list
+        required: false
+        fields:
+          - { label: Photo, name: image, widget: image }
+          - { label: Description, name: alt, widget: string }
+      - { label: Description de l'atelier, name: body, widget: markdown }
