@@ -1,4 +1,4 @@
-# La Maisnie des Griffons — Site vitrine
+# La Maisnie des Griffons : site vitrine
 
 Site statique de l'association de reconstitution historique **La Maisnie des Griffons** (XIIIème siècle).
 
