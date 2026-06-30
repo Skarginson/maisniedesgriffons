@@ -1,11 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
 import site from '../data/site.json';
 
 interface Props { transparent?: boolean; }
 const { transparent = false } = Astro.props;
-
-const membres = (await getCollection('membres')).sort((a, b) => a.data.order - b.data.order);
 
 const campPages = [
   { href: '/camp/', label: 'Vue d\'ensemble' },
@@ -42,22 +39,10 @@ function isActive(path: string) {
           <a href="/" class:list={['nav-link', { active: isActive('/') }]}>Accueil</a>
         </li>
 
-        <li class="has-dropdown">
+        <li>
           <a href="/maisnie/" class:list={['nav-link', { active: isActive('/maisnie/') }]}>
             La Maisnie
-            <svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-              <path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
           </a>
-          <ul class="dropdown">
-            {membres.map(m => (
-              <li>
-                <a href={`/maisnie/${m.slug}/`} class="dropdown-link">
-                  {m.data.title}
-                </a>
-              </li>
-            ))}
-          </ul>
         </li>
 
         <li class="has-dropdown">

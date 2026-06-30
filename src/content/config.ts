@@ -1,16 +1,5 @@
 import { defineCollection, z } from 'astro:content';
 
-const membres = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    order: z.number(),
-    role: z.string(),
-    photo: z.string(),
-    photoAlt: z.string(),
-  }),
-});
-
 const animations = defineCollection({
   type: 'content',
   schema: z.object({
@@ -42,4 +31,4 @@ const sorties = defineCollection({
   }),
 });
 
-export const collections = { membres, animations, sorties };
+export const collections = { animations, sorties };

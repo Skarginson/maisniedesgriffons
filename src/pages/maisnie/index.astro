@@ -1,58 +1,67 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import MemberCard from '../../components/MemberCard.astro';
-import { getCollection } from 'astro:content';
-
-const membres = (await getCollection('membres')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout
-  title="La Maisnie"
-  description="Les personnages de la Maisnie des Griffons, groupe de reconstitution historique du XIIIème siècle."
+  title="Les membres de la Maisnie"
+  description="Les membres de la Maisnie des Griffons, groupe de reconstitution historique du XIIIème siècle."
 >
   <div class="page-header">
     <div class="container">
-      <h1 class="page-title">La Maisnie</h1>
+      <h1 class="page-title">Les membres de la Maisnie</h1>
       <div class="accent-line"></div>
-      <p class="page-subtitle">Les personnages de la Maisnie des Griffons</p>
     </div>
   </div>
 
   <section class="maisnie-intro">
-    <div class="container">
-      <p class="intro-text reveal">
-        La maisnie assemblée autour d'Amaury de Bailleul est un groupe uni par des liens à la fois
-        familiaux et économiques : une famille élargie aux amis et alliés, aux proches collaborateurs
-        et serviteurs, qui vit sous le même toit, le manoir de la Chesnay.
-        Cliquez sur un personnage pour en apprendre davantage.
-      </p>
-    </div>
-  </section>
-
-  <section class="membres-section">
-    <div class="container">
-      <div class="membres-grid">
-        {membres.map(m => (
-          <MemberCard
-            title={m.data.title}
-            slug={m.slug}
-            role={m.data.role}
-            photo={m.data.photo}
-            photoAlt={m.data.photoAlt}
-          />
-        ))}
+    <div class="container intro-layout">
+      <div class="intro-body">
+        <p class="intro-text reveal">
+          La maisnie assemblée autour de la Compagnie des Griffons est un groupe uni par des liens à la fois familiaux, économiques et sociaux : une famille élargie aux amis et alliés, aux proches collaborateurs et serviteurs. Ils vivent sous le même toit, dans la maison familiale ou dans le même quartier où tous travaillent ensemble et nouent des liens de solidarité typique de la vie urbaine du moyen-âge.
+        </p>
+        <p class="intro-text reveal">
+          Les Griffons, c'est d'abord une famille patricienne siennoise, de la catégorie de la petite noblesse urbaine. Elle est active dans le commerce comme beaucoup d'autres dans ces cités états italiennes. Marchands, puis changeurs et banquiers, ils visitent les foires de Champagne pour leurs affaires et pour faire prospérer leur compagnie.
+        </p>
+        <p class="intro-text reveal">
+          Une famille importante, c'est aussi beaucoup de gens de la maison, commensaux et proches, qui font vivre la maisonnée.
+        </p>
+        <p class="intro-text reveal">
+          Pour leur commerce, les Griffons ont de nombreux accords avec des artisans qui fabriquent tous les produits vendus sur les foires.
+        </p>
       </div>
+      <img src="/placeholder.svg" alt="" class="intro-photo reveal" aria-hidden="true" />
     </div>
   </section>
 </BaseLayout>
 
 <style>
-.maisnie-intro { padding: 3rem 0 1rem; }
+.maisnie-intro { padding: 3rem 0 6rem; }
+
+.intro-layout {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.intro-body { flex: 1; }
+
+.intro-photo {
+  flex-shrink: 0;
+  width: 320px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+
 .intro-text {
   color: var(--text-muted);
-  max-width: 700px;
   font-size: 1.05rem;
   line-height: 1.85;
+  margin-bottom: 1.5rem;
 }
-.membres-section { padding: 2rem 0 6rem; }
+
+@media (max-width: 768px) {
+  .intro-layout { flex-direction: column; }
+  .intro-photo { width: 100%; }
+}
 </style>
